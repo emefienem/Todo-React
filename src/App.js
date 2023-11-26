@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import {Nav, Todo, InProgress, Done} from './components'
+import React from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Nav />
+      <DndProvider backend={HTML5Backend}>
+        <Todo />
+      </DndProvider>
+      <DndProvider backend={HTML5Backend} > 
+        <InProgress />
+      </DndProvider>
+      <DndProvider backend={HTML5Backend} > 
+        <Done />
+      </DndProvider>
     </div>
   );
-}
+};
 
 export default App;
