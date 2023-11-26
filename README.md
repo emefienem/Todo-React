@@ -13,7 +13,7 @@ React DnD: Drag and drop for React, making it simple to build interactive interf
 
 ##How to Use
 1. Clone the Repository
-git clone https://github.com/your-username/todo-app.git
+git clone https://github.com/emefienem/todo-app.git
 cd todo-app
 2. Install Dependencies
 npm install
