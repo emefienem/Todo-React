@@ -1,17 +1,17 @@
-React To-Do App with Drag and Drop
+# React To-Do App
 This is a simple To-Do application built with React that allows you to organize your tasks using drag and drop functionality.
 
-##Features
+## Features
 Drag and Drop: Organize your tasks effortlessly by dragging and dropping them to different sections.
 Modal: Easily add new tasks with a modal that provides a clean interface.
 Responsive Design: The application is designed to work seamlessly on both desktop and mobile devices.
 
-##Technologies Used
+## Technologies Used
 React: JavaScript library for building user interfaces.
 Material-UI: React component library for designing responsive and consistent UIs.
 React DnD: Drag and drop for React, making it simple to build interactive interfaces.
 
-##How to Use
+## How to Use
 1. Clone the Repository
 git clone https://github.com/emefienem/todo-app.git
 cd todo-app
