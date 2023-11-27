@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { Button, Typography, useMediaQuery } from "@mui/material";
+import { Button, Typography, useMediaQuery, IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 import { CustomModal } from "./";
-
 const style = {
   position: "absolute",
   padding: "8px",
@@ -15,7 +15,7 @@ const style = {
 };
 
 const InProgress = () => {
-  const isMobile = useMediaQuery("(max-width:600px)")
+  const isMobile = useMediaQuery("(max-width:600px)");
   const [openModal, setOpenModal] = useState(false);
   const [taskInput, setTaskInput] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -48,6 +48,8 @@ const InProgress = () => {
     }),
   });
 
+  // const totalHeight = tasks.reduce((acc, task) => acc + task.height, 0);
+
   return (
     <div
       ref={drag}
@@ -55,12 +57,15 @@ const InProgress = () => {
         ...style,
         opacity: isDragging ? 0.5 : 1,
         borderRadius: 15,
-        display: "flex",
+        display: isMobile ? "block" : "flex",
         flexDirection: "column",
         position: "absolute",
-        left: isMobile ? 0 : '65vh',
-        bottom: isMobile ? '40vh' : '', 
-        width: isMobile ? '35vh' : '60vh'
+        left: isMobile ? 0 : "65vh",
+        bottom: isMobile ? "35vh" : "",
+        width: isMobile ? "37vh" : "60vh",
+        height: isMobile ? "15vh" : "",
+        flex: 1,
+        overflowY: isMobile ? "auto" : "",
       }}
     >
       <Typography
@@ -99,23 +104,22 @@ const InProgress = () => {
               marginBottom: "8px",
               display: "flex",
               alignItems: "center",
+              width: isMobile ? "100%" : "",
+              boxSizing: "border-box",
             }}
           >
             <div style={{ flex: 1 }}>{task}</div>
-            <Button
-              variant="outlined"
-              color="primary"
+            <IconButton
               style={{
                 border: "none",
                 backgroundColor: "red",
                 color: "#fff",
                 borderRadius: 20,
-                p: 1,
               }}
               onClick={() => handleRemoveTask(index)}
             >
-              X
-            </Button>
+              <Close />
+            </IconButton>
           </div>
         ))}
       </div>
@@ -123,9 +127,9 @@ const InProgress = () => {
       <Button
         onClick={handleOpenModal}
         style={{
-          position: "absolute",
-          bottom: 5,
-          right: 20,
+          position: isMobile ? "relative" : "absolute",
+          bottom: isMobile ? 2 : 5,
+          right: isMobile ? 0 : 20,
           borderRadius: 30,
           border: "1px solid #e3e3e3",
           backgroundColor: "green",

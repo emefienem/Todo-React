@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { Button, Typography, useMediaQuery } from "@mui/material";
+import { Button, Typography, useMediaQuery, IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 import { CustomModal } from "./";
 
 const style = {
@@ -15,7 +16,7 @@ const style = {
 };
 
 const Todo = () => {
-  const isMobile = useMediaQuery("(max-width:600px)")
+  const isMobile = useMediaQuery("(max-width:799px)");
   const [openModal, setOpenModal] = useState(false);
   const [taskInput, setTaskInput] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -66,9 +67,13 @@ const Todo = () => {
         ...style,
         opacity: isDragging ? 0.5 : 1,
         borderRadius: 15,
-        display: isMobile ? 'block' : 'flex',
+        display: isMobile ? "block" : "flex",
         flexDirection: "column",
-        width: isMobile ? '35vh' : '60vh'
+        bottom: isMobile ? "55vh" : "",
+        width: isMobile ? "37vh" : "60vh",
+        height: isMobile ? "15vh" : "",
+        flex: 1,
+        overflowY: isMobile ? "auto" : "",
       }}
     >
       <Typography
@@ -107,23 +112,22 @@ const Todo = () => {
               marginBottom: "8px",
               display: "flex",
               alignItems: "center",
+              width: isMobile ? "100%" : "",
+              boxSizing: "border-box",
             }}
           >
             <div style={{ flex: 1 }}>{task}</div>
-            <Button
-              variant="outlined"
-              color="primary"
+            <IconButton
               style={{
                 border: "none",
                 backgroundColor: "red",
                 color: "#fff",
                 borderRadius: 20,
-                p: 1,
               }}
               onClick={() => handleRemoveTask(index)}
             >
-              X
-            </Button>
+              <Close />
+            </IconButton>
           </div>
         ))}
       </div>
@@ -131,9 +135,9 @@ const Todo = () => {
       <Button
         onClick={handleOpenModal}
         style={{
-          position: "absolute",
-          bottom: 5,
-          right: 20,
+          position: isMobile ? "relative" : "absolute",
+          bottom: isMobile ? 2 : 5,
+          right: isMobile ? 0 : 20,
           borderRadius: 30,
           border: "1px solid #e3e3e3",
           backgroundColor: "green",

@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useDrag } from "react-dnd";
 import { ItemTypes } from "./ItemTypes";
-import { Button, Typography, useMediaQuery } from "@mui/material";
+import { Button, Typography, useMediaQuery, IconButton } from "@mui/material";
+import { Close } from "@mui/icons-material";
 import { CustomModal } from "./";
 
 const style = {
@@ -15,7 +16,7 @@ const style = {
 };
 
 const Done = () => {
-  const isMobile = useMediaQuery("(max-width:600px)")
+  const isMobile = useMediaQuery("(max-width:600px)");
   const [openModal, setOpenModal] = useState(false);
   const [taskInput, setTaskInput] = useState("");
   const [tasks, setTasks] = useState([]);
@@ -55,12 +56,15 @@ const Done = () => {
         ...style,
         opacity: isDragging ? 0.5 : 1,
         borderRadius: 15,
-        display: "flex",
+        display: isMobile ? "block" : "flex",
         flexDirection: "column",
         position: "absolute",
-        left: isMobile ? 0 : '130vh',
-        bottom: isMobile ? '20vh' : '', 
-        width: isMobile ? '35vh' : '60vh'
+        left: isMobile ? 0 : "130vh",
+        bottom: isMobile ? "15vh" : "",
+        width: isMobile ? "37vh" : "60vh",
+        height: isMobile ? "15vh" : "",
+        flex: 1,
+        overflowY: isMobile ? "auto" : "",
       }}
     >
       <Typography
@@ -99,23 +103,22 @@ const Done = () => {
               marginBottom: "8px",
               display: "flex",
               alignItems: "center",
+              width: isMobile ? "100%" : "",
+              boxSizing: "border-box",
             }}
           >
             <div style={{ flex: 1 }}>{task}</div>
-            <Button
-              variant="outlined"
-              color="primary"
+            <IconButton
               style={{
                 border: "none",
                 backgroundColor: "red",
                 color: "#fff",
                 borderRadius: 20,
-                p: 1,
               }}
               onClick={() => handleRemoveTask(index)}
             >
-              X
-            </Button>
+              <Close />
+            </IconButton>
           </div>
         ))}
       </div>
@@ -123,9 +126,9 @@ const Done = () => {
       <Button
         onClick={handleOpenModal}
         style={{
-          position: "absolute",
-          bottom: 10,
-          right: 20,
+          position: isMobile ? "relative" : "absolute",
+          bottom: isMobile ? 2 : 5,
+          right: isMobile ? 5 : 20,
           borderRadius: 30,
           border: "1px solid #e3e3e3",
           backgroundColor: "green",

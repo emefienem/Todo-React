@@ -1,7 +1,8 @@
 import React from 'react';
-import { Modal, Box, Typography, Button, TextField, Grid } from '@mui/material';
+import { Modal, Box, Typography, Button, TextField, Grid, useMediaQuery } from '@mui/material';
 
 const CustomModal = ({ open, handleClose, handleAddTask, taskInput, setTaskInput }) => {
+  const isMobile = useMediaQuery("(max-width:600px)")
   return (
     <Modal open={open} onClose={handleClose}>
       <Box
@@ -10,7 +11,7 @@ const CustomModal = ({ open, handleClose, handleAddTask, taskInput, setTaskInput
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: 350,
+          width: isMobile ? 200 : 350,
           height: 400,
           bgcolor: 'background.paper',
           border: 'none',
