@@ -1,8 +1,30 @@
-import { Paper, IconButton, Typography, Box, useMediaQuery } from "@mui/material";
+import React, { useState } from "react";
+import { Paper, IconButton, Box, useMediaQuery, Button } from "@mui/material";
 import { Search } from "@mui/icons-material";
+import LoginModal from "./LoginModal";
 
 const SearchBar = () => {
   const isMobile = useMediaQuery("(maxwidth:600px)")
+  const [displayLogin, setDisplayLogin] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName,  setLastName] = useState("");
+  const [combinedWord, setCombinedWord] = useState("")
+  
+  const OpenDisplayModal = () => {
+    setDisplayLogin(true);
+  };
+  
+  const CloseDisplayModal = () => {
+    setDisplayLogin(false);
+  };
+  
+  const handleLogin = () => {
+    const firstLetter = firstName.charAt(0);
+    const lastLetter = lastName.charAt(0);
+    const word = `${firstLetter}${lastLetter}`;
+    setCombinedWord(word)
+    CloseDisplayModal()
+  }
   return (
     <Box display="flex">
       <Paper
@@ -26,18 +48,19 @@ const SearchBar = () => {
           <Search />
         </IconButton>
       </Paper>
-      <Typography
+      <Button
+        onClick={OpenDisplayModal}
         sx={{
-          borderRadius: 10,
+          borderRadius: 30,
           border: "none",
-          p: 1.5,
           backgroundColor: "purple",
           color: "#fff",
           ml: isMobile ? '15px' : ''
         }}
       >
-        ME
-      </Typography>
+        {combinedWord ? combinedWord : 'ME'}
+      </Button>
+      <LoginModal open={displayLogin} handleClose={CloseDisplayModal} handleLogin={handleLogin} firstName={firstName} setFirstName={setFirstName} lastName={lastName} setLastName={setLastName} />
     </Box>
   );
 };
